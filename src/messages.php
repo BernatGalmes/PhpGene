@@ -19,16 +19,6 @@ class Messages
     private $ok;
     private $debug;
 
-    /**
-     * Set the debug mode.
-     * Call this method when initialize your app.
-     * @param boolean $debugMode
-     */
-    public static function setDebugMode($debugMode)
-    {
-        self::$debugMode = $debugMode;
-    }
-
     function __construct()
     {
         $this->buida();
@@ -44,6 +34,27 @@ class Messages
         if (self::$debugMode) {
             $this->debug = [];
         }
+    }
+
+    /**
+     * Set the debug mode.
+     * Call this method when initialize your app.
+     * @param boolean $debugMode
+     */
+    public static function setDebugMode($debugMode)
+    {
+        self::$debugMode = $debugMode;
+    }
+
+    /**
+     * Print a variable representation
+     * @param mixed $var
+     */
+    public static function debugVar($var)
+    {
+        echo '<pre>';
+        var_dump($var);
+        echo '</pre>';
     }
 
     /**
@@ -110,13 +121,13 @@ class Messages
         return $this->debug;
     }
 
-//    /**
-//     * print the
-//     */
-//    public function mostra_taula_missatges()
-//    {
-//        echo $this->html();
-//    }
+    /**
+     * print the
+     */
+    public function showMessages()
+    {
+        echo $this->html();
+    }
 
     /**
      * Get an html representation of the messages.
@@ -191,16 +202,5 @@ class Messages
 
             ]
         );
-    }
-
-    /**
-     * Print a variable representation
-     * @param mixed $var
-     */
-    public static function debugVar($var)
-    {
-        echo '<pre>';
-        var_dump($var);
-        echo '</pre>';
     }
 }

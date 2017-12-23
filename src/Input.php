@@ -83,6 +83,11 @@ class Input
         return '';
     }
 
+    private static function sanitize($string)
+    {
+        return trim(htmlentities($string, ENT_QUOTES, 'UTF-8'));
+    }
+
     /**
      * Same function as get, but if the queried data is an array, return an associative array.
      * This is an recursive function that support any array level of information.
@@ -125,11 +130,6 @@ class Input
         } else {
             return self::sanitize($data);
         }
-    }
-
-    private static function sanitize($string)
-    {
-        return trim(htmlentities($string, ENT_QUOTES, 'UTF-8'));
     }
 
 }
