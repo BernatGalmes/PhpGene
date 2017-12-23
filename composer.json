@@ -1,0 +1,19 @@
+{
+  "name": "bernatgalmes/phpgene",
+  "description": "Util classes and functions",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "version": "1.0.0-stable",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Bernat Galmés Rubert",
+      "email": "bernat_galmes@hotmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  }
+}
