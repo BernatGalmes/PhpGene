@@ -2,14 +2,26 @@
 
 namespace PhpGene;
 
-class Missatges
+/**
+ * Class Messages
+ * Class that helps to show messages in an application.
+ * Very useful to show messages before processing a form.
+ * @package PhpGene
+ */
+class Messages
 {
-    private static $debugMode; // Config::DEBUG
+    /**
+     * @var bool Indicate if debugging messages has to be shown.
+     * Always false in production mode.
+     */
+    private static $debugMode = false; // Config::DEBUG
     private $error;
     private $ok;
     private $debug;
 
     /**
+     * Set the debug mode.
+     * Call this method when initialize your app.
      * @param boolean $debugMode
      */
     public static function setDebugMode($debugMode)
@@ -22,6 +34,9 @@ class Missatges
         $this->buida();
     }
 
+    /**
+     * Clear all messages
+     */
     public function buida()
     {
         $this->error = [];
@@ -31,23 +46,28 @@ class Missatges
         }
     }
 
-    public static function debugVar($var)
-    {
-        echo '<pre>';
-        var_dump($var);
-        echo '</pre>';
-    }
-
+    /**
+     * Add a positive message
+     * @param string $msg
+     */
     public function posa_ok($msg)
     {
         $this->ok [] = $msg;
     }
 
+    /**
+     * Add a negative message
+     * @param string $msg
+     */
     public function posa_error($msg)
     {
         $this->error [] = $msg;
     }
 
+    /**
+     * Add a debug message
+     * @param string $msg
+     */
     public function debug($msg)
     {
         if (self::$debugMode) {
@@ -56,7 +76,8 @@ class Missatges
     }
 
     /**
-     * @param $msgs Missatges
+     * Merge self object content with other.
+     * @param $msgs Messages
      */
     public function merge($msgs)
     {
@@ -66,7 +87,7 @@ class Missatges
     }
 
     /**
-     * @return mixed
+     * @return string[]
      */
     public function getError()
     {
@@ -74,7 +95,7 @@ class Missatges
     }
 
     /**
-     * @return mixed
+     * @return string[]
      */
     public function getOk()
     {
@@ -82,18 +103,25 @@ class Missatges
     }
 
     /**
-     * @return mixed
+     * @return string[]
      */
     public function getDebug()
     {
         return $this->debug;
     }
 
-    public function mostra_taula_missatges()
-    {
-        echo $this->html();
-    }
+//    /**
+//     * print the
+//     */
+//    public function mostra_taula_missatges()
+//    {
+//        echo $this->html();
+//    }
 
+    /**
+     * Get an html representation of the messages.
+     * @return string html object representation.
+     */
     public function html()
     {
         $html = '';
@@ -149,6 +177,10 @@ class Missatges
         return (!empty($this->error));
     }
 
+    /**
+     * Get the messages as a json object
+     * @return string
+     */
     public function json()
     {
         return json_encode(
@@ -159,5 +191,16 @@ class Missatges
 
             ]
         );
+    }
+
+    /**
+     * Print a variable representation
+     * @param mixed $var
+     */
+    public static function debugVar($var)
+    {
+        echo '<pre>';
+        var_dump($var);
+        echo '</pre>';
     }
 }

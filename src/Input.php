@@ -2,17 +2,27 @@
 
 namespace PhpGene;
 
+/**
+ * Class Input
+ * Ease get and post input management
+ * @package PhpGene
+ */
 class Input
 {
+    /**
+     * Check if we are receiving data from post or get
+     * @param string $type 'post' or 'get', the name of the input array to check
+     * @return bool
+     */
     public static function exists($type = 'post')
     {
         switch ($type) {
             case 'post':
-                return (!empty($_POST)) ? true : false;
+                return !empty($_POST);
                 break;
 
             case 'get':
-                return (!empty($_GET)) ? true : false;
+                return !empty($_GET);
 
             default:
                 return false;
@@ -33,6 +43,13 @@ class Input
         return $data;
     }
 
+    /**
+     * Get the specified item received
+     * @param string $item name of the item to get
+     * @return string|string[]  Content of the item received.
+     *                          Strings returned are always sanitized.
+     *                          If no item is found return an empty string.
+     */
     public static function get($item)
     {
         if (isset($_POST[$item])) {
@@ -66,11 +83,12 @@ class Input
         return '';
     }
 
-    public static function sanitize($string)
-    {
-        return trim(htmlentities($string, ENT_QUOTES, 'UTF-8'));
-    }
-
+    /**
+     * Same function as get, but if the queried data is an array, return an associative array.
+     * This is an recursive function that support any array level of information.
+     * @param $item
+     * @return array|string
+     */
     public static function get_assoc($item)
     {
         if (isset($_POST[$item])) {
@@ -108,4 +126,10 @@ class Input
             return self::sanitize($data);
         }
     }
+
+    private static function sanitize($string)
+    {
+        return trim(htmlentities($string, ENT_QUOTES, 'UTF-8'));
+    }
+
 }
