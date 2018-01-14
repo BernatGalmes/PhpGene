@@ -33,6 +33,10 @@ abstract class database_item
      */
     function __construct($item, $db_table)
     {
+        if (!is_string($db_table)){
+            Messages::debugVar($db_table);
+            throw new \Exception("incorrect table name");
+        }
         $this->_db_table = $db_table;
         if (is_array($item)){ // item is data
             $this->_data = $item;
