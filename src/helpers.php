@@ -51,6 +51,13 @@ function rrmdir($dir)
     rmdir($dir);
 }
 
+function rm_file($filename){
+    if (file_exists($filename)){
+        return unlink($filename);
+    }
+    return true;
+}
+
 function sanitize($string)
 {
     return htmlentities($string, ENT_QUOTES, 'UTF-8');

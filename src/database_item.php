@@ -34,7 +34,6 @@ abstract class database_item
     function __construct($item, $db_table)
     {
         if (!is_string($db_table)){
-            Messages::debugVar($db_table);
             throw new \Exception("incorrect table name");
         }
         $this->_db_table = $db_table;
@@ -90,5 +89,10 @@ abstract class database_item
             return $this->_data[$name];
         }
         return '';
+    }
+
+    public function setAttr($attr, $value)
+    {
+        $this->_data[$attr] = $value;
     }
 }
