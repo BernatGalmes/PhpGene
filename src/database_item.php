@@ -25,6 +25,11 @@ abstract class database_item
     protected $_data;
 
     /**
+     * @var Messages instance to keep the validation messages
+     */
+    protected $_msgs;
+
+    /**
      * database_item constructor.
      * @param array|int|null $item data(associative array) or identifier(int) of the item to build.
      *                              If null, data is not filled.
@@ -94,5 +99,16 @@ abstract class database_item
     public function setAttr($attr, $value)
     {
         $this->_data[$attr] = $value;
+    }
+
+
+
+    public function getMessages()
+    {
+        if (!isset($this->_msgs)) {
+            return new Messages();
+        } else {
+            return $this->_msgs;
+        }
     }
 }
