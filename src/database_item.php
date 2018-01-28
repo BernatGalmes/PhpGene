@@ -111,4 +111,15 @@ abstract class database_item
             return $this->_msgs;
         }
     }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        if (isset($this->_data)){
+            return $this->_data;
+        }
+        return [];
+    }
 }
