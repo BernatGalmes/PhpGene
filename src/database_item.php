@@ -122,4 +122,11 @@ abstract class database_item
         }
         return [];
     }
+
+    public function setData($data)
+    {
+        foreach ($data as $key => $camp) {
+            $this->_data[$key] = $camp;
+        }
+    }
 }
