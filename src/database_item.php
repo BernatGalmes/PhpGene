@@ -106,10 +106,9 @@ abstract class database_item
     public function getMessages()
     {
         if (!isset($this->_msgs)) {
-            return new Messages();
-        } else {
-            return $this->_msgs;
+            $this->_msgs = new Messages();
         }
+        return $this->_msgs;
     }
 
     /**
