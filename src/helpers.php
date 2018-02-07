@@ -12,9 +12,9 @@ function cdate()
     return $date->getTimestamp();
 }
 
-function getTimeStamp($date)
+function getTimeStamp($date, $format='d-m-Y')
 {
-    if ($dt = \DateTime::createFromFormat('d-m-Y', $date)) {
+    if ($dt = \DateTime::createFromFormat($format, $date)) {
         return $dt->getTimestamp();
     }
     return false;

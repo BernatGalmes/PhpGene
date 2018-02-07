@@ -1,6 +1,7 @@
 <?php
 
 namespace PhpGene;
+use PhpOffice\PhpSpreadsheet\Exception;
 
 /**
  * Class database_item
@@ -10,6 +11,10 @@ namespace PhpGene;
  */
 abstract class database_item
 {
+    const ACTION_INSERT = 'insert';
+    const ACTION_UPDATE = 'update';
+    const ACTION_REMOVE = 'remove';
+
     const ID_NAME = "id";
 
     /**
@@ -62,17 +67,21 @@ abstract class database_item
     /**
      * Update the database data with the current object data
      * @return true
-     * @throws \Exception item can't be updated
      */
     public abstract function update();
 
     /**
      * Remove the item in the database
      * @return bool
-     * @throws \Exception item can't be deleted
      */
     public abstract function remove();
 
+
+    /**
+     * Insert item in database
+     * @return bool
+     */
+    public abstract function insert();
 
     /**
      * Get the identifier of the item
@@ -127,5 +136,41 @@ abstract class database_item
         foreach ($data as $key => $camp) {
             $this->_data[$key] = $camp;
         }
+    }
+
+    /**
+     * @param $action
+     * @return bool|true
+     */
+    public function performAction($action){
+        switch ($action){
+            case self::ACTION_INSERT:
+                $stat = $this->insert();
+                if ($stat){
+                    $this->_msgs->posa_ok("Item inserted correctly.");
+                }else{
+                    $this->_msgs->posa_error("Error inserting item.");
+                }
+                break;
+            case self::ACTION_UPDATE:
+                $stat = $this->update();
+                if ($stat){
+                    $this->_msgs->posa_ok("Item updated correctly.");
+                }else{
+                    $this->_msgs->posa_error("Error updating item.");
+                }
+                break;
+            case self::ACTION_REMOVE:
+                $stat = $this->remove();
+                if ($stat){
+                    $this->_msgs->posa_ok("Item removed successfully.");
+                }else{
+                    $this->_msgs->posa_error("Error deleting item.");
+                }
+                break;
+            default:
+                return false;
+        }
+        return $stat;
     }
 }
