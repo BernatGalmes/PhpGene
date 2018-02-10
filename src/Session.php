@@ -41,10 +41,15 @@ class Session
 
     public static function uagent_no_version()
     {
-        $uagent = $_SERVER['HTTP_USER_AGENT'];
-        $regx = '/\/[a-zA-Z0-9.]+/';
-        $newString = preg_replace($regx, '', $uagent);
-        return $newString;
+        if (isset($_SERVER['HTTP_USER_AGENT'])) {
+            $uagent = $_SERVER['HTTP_USER_AGENT'];
+            $regx = '/\/[a-zA-Z0-9.]+/';
+            $newString = preg_replace($regx, '', $uagent);
+            return $newString;
+        }
+        else{
+            return 'cant get';
+        }
     }
 
 }
