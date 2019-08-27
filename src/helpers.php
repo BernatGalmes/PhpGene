@@ -1,9 +1,9 @@
 <?php
 
-function currentDateFormated()
+function currentDateFormated($format='d-m-Y')
 {
     $date = new \DateTime();
-    return $date->format('d-m-Y');
+    return $date->format($format);
 }
 
 function cdate()

@@ -188,6 +188,11 @@ class Messages
         return (!empty($this->error));
     }
 
+    public function hiHaMissatges()
+    {
+        return (!empty($this->error)) or (!empty($this->ok)) or (!empty($this->debug));
+    }
+
     /**
      * Get the messages as a json object
      * @return array
