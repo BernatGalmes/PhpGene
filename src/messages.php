@@ -190,17 +190,23 @@ class Messages
 
     /**
      * Get the messages as a json object
+     * @return array
+     */
+    public function asArray()
+    {
+        return [
+                    'errors' => $this->error,
+                    'success' => $this->ok,
+                    'debug' => $this->debug,
+                ];
+    }
+
+    /**
+     * Get the messages as a json object
      * @return string
      */
     public function json()
     {
-        return json_encode(
-            [
-                'errors' => $this->error,
-                'success' => $this->ok,
-                'debug' => $this->debug,
-
-            ]
-        );
+        return json_encode($this->asArray());
     }
 }
