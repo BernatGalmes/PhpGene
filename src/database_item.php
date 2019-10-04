@@ -173,4 +173,12 @@ abstract class database_item
         }
         return $stat;
     }
+
+    /**
+     * @return string
+     */
+    public function getDbTable(): string
+    {
+        return $this->_db_table;
+    }
 }
