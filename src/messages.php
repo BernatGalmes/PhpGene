@@ -2,6 +2,8 @@
 
 namespace PhpGene;
 
+use App\Config;
+
 /**
  * Class Messages
  * Class that helps to show messages in an application.
@@ -14,7 +16,7 @@ class Messages
      * @var bool Indicate if debugging messages has to be shown.
      * Always false in production mode.
      */
-    private static $debugMode = false; // Config::DEBUG
+    private static $debugMode = Config::DEBUG;
     private $error;
     private $ok;
     private $debug;
